@@ -1,1 +1,128 @@
-💡 Compound Poisson Process DerivationThe process $S(t)$ is a Compound Poisson Process because the arrivals (interarrival times) follow a Poisson process, and the claim sizes ($X_i$) are independent and identically distributed (i.i.d.).The compound process is defined as:$$S(t) = \sum_{i=1}^{N(t)} X_i$$where:$N(t)$ is a Poisson counting process with rate $\lambda$ (the parameter of the exponential interarrival times).$X_i$ are i.i.d. random variables representing the claim sizes, with $X_i \sim \text{Exp}(\mu)$.1. The Distribution of the Counting Process $N(t)$Since the interarrival times are $\text{Exp}(\lambda)$, the number of arrivals in time $t$, $N(t)$, follows a Poisson distribution:$$P(N(t) = k) = e^{-\lambda t} \frac{(\lambda t)^k}{k!} \quad \text{for } k = 0, 1, 2, \dots$$2. The Moment Generating Function (MGF) of $S(t)$The simplest way to derive the distribution of $S(t)$ is through its MGF, $M_{S(t)}(\theta)$.The MGF of a Compound Poisson Process is given by:$$M_{S(t)}(\theta) = \exp \left\{ \lambda t \left[ M_X(\theta) - 1 \right] \right\}$$where $M_X(\theta)$ is the MGF of a single claim size $X$.Since $X \sim \text{Exp}(\mu)$, its MGF is:$$M_X(\theta) = \frac{\mu}{\mu - \theta} \quad \text{for } \theta < \mu$$Substituting $M_X(\theta)$ into the MGF of $S(t)$:$$M_{S(t)}(\theta) = \exp \left\{ \lambda t \left[ \frac{\mu}{\mu - \theta} - 1 \right] \right\}$$$$M_{S(t)}(\theta) = \exp \left\{ \lambda t \left[ \frac{\mu - (\mu - \theta)}{\mu - \theta} \right] \right\}$$$$M_{S(t)}(\theta) = \exp \left\{ \frac{\lambda t \theta}{\mu - \theta} \right\}$$3. The Distribution of $S(t)$The MGF $M_{S(t)}(\theta)$ does not correspond to a standard named distribution. The distribution of $S(t)$ is a mixed distribution (also called a mixture distribution), defined by conditioning on the number of claims $N(t)=k$:$$P(S(t) \le s) = \sum_{k=0}^{\infty} P(S(t) \le s \mid N(t)=k) \cdot P(N(t)=k)$$Case $k=0$: $S(t)=0$. $P(S(t)=0) = P(N(t)=0) = e^{-\lambda t}$.Case $k > 0$: $S(t) = \sum_{i=1}^{k} X_i$. Since $X_i \sim \text{Exp}(\mu)$, the sum of $k$ i.i.d. exponential random variables follows a Gamma distribution with parameters $(k, \mu)$, often denoted $\text{Gamma}(k, \mu)$ or $\text{Erlang}(k, \mu)$.Thus, the probability density function (PDF) of $S(t)$, $f_{S(t)}(s)$, is a point mass at zero plus a continuous component for $s > 0$:$$f_{S(t)}(s) = \begin{cases} e^{-\lambda t} & \text{if } s=0 \\ \sum_{k=1}^{\infty} e^{-\lambda t} \frac{(\lambda t)^k}{k!} \cdot \frac{\mu^k s^{k-1} e^{-\mu s}}{(k-1)!} & \text{if } s > 0 \end{cases}$$This distribution is known as a Compound Poisson-Exponential distribution.
+Here’s a clean, well-structured **README-ready** version of your derivation, formatted in Markdown and written clearly for GitHub documentation.
+
+---
+
+# 📘 Compound Poisson Process — Derivation and Explanation
+
+This document provides a clear derivation of the distribution of a **Compound Poisson Process**:
+
+[
+S(t) = \sum_{i=1}^{N(t)} X_i
+]
+
+where
+
+* (N(t)) is a Poisson counting process with rate (\lambda),
+* (X_i) are i.i.d. claim sizes with (X_i \sim \text{Exp}(\mu)).
+
+---
+
+## 🔢 1. Counting Process Distribution
+
+Because the interarrival times follow an exponential distribution (\text{Exp}(\lambda)), the number of arrivals in time (t) follows a **Poisson distribution**:
+
+[
+P(N(t) = k) = e^{-\lambda t} \frac{(\lambda t)^k}{k!}, \quad k = 0, 1, 2, \dots
+]
+
+---
+
+## 📈 2. Moment Generating Function (MGF) of (S(t))
+
+A fundamental tool for deriving the distribution of a Compound Poisson Process is its **moment generating function (MGF)**:
+
+[
+M_{S(t)}(\theta) = \exp\left{ \lambda t\left[ M_X(\theta) - 1 \right] \right}.
+]
+
+Since (X \sim \text{Exp}(\mu)), its MGF is:
+
+[
+M_X(\theta) = \frac{\mu}{\mu - \theta}, \qquad \theta < \mu.
+]
+
+Substituting this into the MGF of the compound process:
+
+[
+\begin{aligned}
+M_{S(t)}(\theta)
+&= \exp\left{ \lambda t\left[ \frac{\mu}{\mu - \theta} - 1 \right] \right} \
+&= \exp\left{ \lambda t \left[ \frac{\theta}{\mu - \theta} \right] \right}.
+\end{aligned}
+]
+
+Thus, the MGF of (S(t)) is:
+
+[
+\boxed{ M_{S(t)}(\theta) = \exp\left( \frac{\lambda t , \theta}{\mu - \theta} \right) }.
+]
+
+---
+
+## 📦 3. Distribution of the Compound Sum (S(t))
+
+The distribution of (S(t)) is **not a standard named distribution**, but can be expressed through the law of total probability:
+
+[
+P(S(t) \le s) = \sum_{k=0}^{\infty} P(S(t) \le s \mid N(t)=k), P(N(t)=k).
+]
+
+### Case: (k = 0)
+
+If no arrivals occur, (S(t) = 0):
+
+[
+P(S(t) = 0) = e^{-\lambda t}.
+]
+
+### Case: (k > 0)
+
+Given (N(t)=k):
+
+[
+S(t) = \sum_{i=1}^k X_i.
+]
+
+Because each (X_i \sim \text{Exp}(\mu)), the sum is **Gamma distributed**:
+
+[
+S(t) \mid N(t)=k \sim \text{Gamma}(k, \mu).
+]
+
+The Gamma PDF for shape (k) and rate (\mu) is:
+
+[
+f(s \mid N(t)=k) = \frac{\mu^k s^{k-1} e^{-\mu s}}{(k-1)!}, \qquad s>0.
+]
+
+---
+
+## 📊 Final PDF of (S(t))
+
+The full density is a **mixture** of a point mass at zero and an infinite weighted sum of Gamma densities:
+
+[
+f_{S(t)}(s) =
+\begin{cases}
+e^{-\lambda t}, & s = 0, [6pt]
+\displaystyle
+\sum_{k=1}^{\infty}
+e^{-\lambda t} \frac{(\lambda t)^k}{k!}
+\cdot
+\frac{\mu^k s^{k-1} e^{-\mu s}}{(k-1)!},
+& s > 0.
+\end{cases}
+]
+
+This is known as the **Compound Poisson–Exponential distribution**.
+
+---
+
+If you'd like, I can also add:
+
+✅ A visualization section (plots)
+✅ Example simulation code (Python / R)
+✅ A table of moments (E[S(t)]), (\text{Var}(S(t)))
+✅ A “Usage” section for GitHub
+
+Just tell me!
