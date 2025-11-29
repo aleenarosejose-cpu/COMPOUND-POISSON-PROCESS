@@ -1,7 +1,3 @@
-Here’s a clean, well-structured **README-ready** version of your derivation, formatted in Markdown and written clearly for GitHub documentation.
-
----
-
 # 📘 Compound Poisson Process — Derivation and Explanation
 
 This document provides a clear derivation of the distribution of a **Compound Poisson Process**:
@@ -115,14 +111,3 @@ e^{-\lambda t} \frac{(\lambda t)^k}{k!}
 ]
 
 This is known as the **Compound Poisson–Exponential distribution**.
-
----
-
-If you'd like, I can also add:
-
-✅ A visualization section (plots)
-✅ Example simulation code (Python / R)
-✅ A table of moments (E[S(t)]), (\text{Var}(S(t)))
-✅ A “Usage” section for GitHub
-
-Just tell me!
